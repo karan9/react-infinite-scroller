@@ -30,6 +30,8 @@ export default class InfiniteScroll extends Component {
     loader: null,
   };
 
+  DEBUG_TAG = '__INFINITE_SCROLL__';
+
   constructor(props) {
     super(props);
 
@@ -96,6 +98,10 @@ export default class InfiniteScroll extends Component {
 
   attachScrollListener() {
     if (!this.props.hasMore || !this.getParentElement(this.scrollComponent)) {
+      console.error(
+        this.DEBUG_TAG,
+        'ScrollListener, Parent element not found.',
+      );
       return;
     }
 
@@ -137,6 +143,9 @@ export default class InfiniteScroll extends Component {
     const el = this.scrollComponent;
     const scrollEl = window;
     const parentNode = this.getParentElement(el);
+
+    // DEBUG
+    console.log(this.DEBUG_TAG, 'Element, ', el);
 
     let offset;
     if (this.props.useWindow) {

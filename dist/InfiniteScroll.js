@@ -95,6 +95,8 @@ var InfiniteScroll = (function(_Component) {
       ),
     );
 
+    _this.DEBUG_TAG = '__INFINITE_SCROLL__';
+
     _this.scrollListener = _this.scrollListener.bind(_this);
     return _this;
   }
@@ -182,6 +184,10 @@ var InfiniteScroll = (function(_Component) {
           !this.props.hasMore ||
           !this.getParentElement(this.scrollComponent)
         ) {
+          console.error(
+            this.DEBUG_TAG,
+            'ScrollListener, Parent element not found.',
+          );
           return;
         }
 
@@ -227,6 +233,9 @@ var InfiniteScroll = (function(_Component) {
         var el = this.scrollComponent;
         var scrollEl = window;
         var parentNode = this.getParentElement(el);
+
+        // DEBUG
+        console.log(this.DEBUG_TAG, 'Element, ', el);
 
         var offset = void 0;
         if (this.props.useWindow) {
